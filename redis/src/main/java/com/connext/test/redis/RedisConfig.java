@@ -1,9 +1,10 @@
 package com.connext.test.redis;
-
+import java.lang.reflect.Method;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -15,36 +16,51 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import java.lang.reflect.Method;
-
-@Configuration
-@EnableCaching
-public class RedisConfig extends CachingConfigurerSupport {
-
-//    @Value("${spring.redis.host}")
-//    private String host;
+//@Configuration
+//@EnableCaching // 继承CachingConfigurerSupport并重写方法,配合该注解实现spring缓存框架的启用
+//public class RedisConfig extends CachingConfigurerSupport {
+//    /** 载入通过配置文件配置的连接工场 **/
+//    @Autowired
+//    RedisConnectionFactory redisConnectionFactory;
 //
-//    @Value("${spring.redis.port}")
-//    private int port;
+//    @SuppressWarnings("rawtypes")
+//    @Autowired
+//    RedisTemplate redisTemplate;
 //
-//    @Value("${spring.redis.timeout}")
-//    private int timeout;
-//
-//    @Value("${spring.redis.database}")
-//    private int database;
-//
-//    @Value("${spring.redis.password}")
-//    private String password;
-//    /**
-//     * 键的生成策略
-//     * @return
-//     */
 //    @Bean
-//    public KeyGenerator wiselyKeyGenerator() {
+//    RedisTemplate<String, Object> objRedisTemplate() {
+//        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+//        redisTemplate.setConnectionFactory(redisConnectionFactory);
+//        return redisTemplate;
+//    }
+//
+//    /*
+//     * (non-Javadoc)
+//     *
+//     * @see org.springframework.cache.annotation.CachingConfigurerSupport#
+//     * cacheManager()
+//     */
+//    @Bean // 必须添加此注解
+//    @Override
+//    public CacheManager cacheManager() {
+//        RedisCacheManager redisCacheManager = new RedisCacheManager(redisTemplate);
+//        // 设置缓存过期时间
+//        // redisCacheManager.setDefaultExpiration(60);//秒
+//        return redisCacheManager;
+//    }
+//
+//    /**
+//     * 重写缓存的key生成策略,可根据自身业务需要进行自己的配置生成条件
+//     *
+//     * @see org.springframework.cache.annotation.CachingConfigurerSupport#
+//     * keyGenerator()
+//     */
+//    @Bean // 必须项
+//    @Override
+//    public KeyGenerator keyGenerator() {
 //        return new KeyGenerator() {
 //            @Override
 //            public Object generate(Object target, Method method, Object... params) {
@@ -59,67 +75,107 @@ public class RedisConfig extends CachingConfigurerSupport {
 //        };
 //    }
 //
-//    @Bean
-//    public JedisConnectionFactory redisConnectionFactory() {
-//        JedisConnectionFactory factory = new JedisConnectionFactory();
-//        factory.setHostName(host);
-//        factory.setPort(port);
-//        factory.setTimeout(timeout);
-//        factory.setPassword(password);
-//        factory.setDatabase(database);
-//        return factory;
-//    }
-//
-//    /**
-//     * 配置CacheManager 管理cache
-//     * @param redisTemplate
-//     * @return
-//     */
-//    @Bean
-//    public CacheManager cacheManager(RedisTemplate redisTemplate) {
-//        RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
-//        cacheManager.setDefaultExpiration(60*60); // 设置key-value超时时间
-//        return cacheManager;
-//    }
-//
-//
-//
-//    @Bean
-//    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
-//        RedisTemplate<Object, Object> template = new RedisTemplate<>();
-//        template.setConnectionFactory(connectionFactory);
-//
-//        //使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值
-//        Jackson2JsonRedisSerializer serializer = new Jackson2JsonRedisSerializer(Object.class);
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-//        mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-//        serializer.setObjectMapper(mapper);
-//
-//        template.setValueSerializer(serializer);
-//        //使用StringRedisSerializer来序列化和反序列化redis的key值
-//        template.setKeySerializer(new StringRedisSerializer());
-//        template.afterPropertiesSet();
-//        return template;
-//    }
+//}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@Configuration
+@EnableCaching
+public class RedisConfig extends CachingConfigurerSupport {
+
+    @Value("${spring.redis.host}")
+    private String host;
+
+    @Value("${spring.redis.port}")
+    private int port;
+
+    @Value("${spring.redis.timeout}")
+    private int timeout;
+
+    @Value("${spring.redis.database}")
+    private int database;
+
+    @Value("${spring.redis.password}")
+    private String password;
+    /**
+     * 键的生成策略
+     * @return
+     */
+    @Bean
+    public KeyGenerator wiselyKeyGenerator() {
+        return new KeyGenerator() {
+            @Override
+            public Object generate(Object target, Method method, Object... params) {
+                StringBuilder sb = new StringBuilder();
+                sb.append(target.getClass().getName());
+                sb.append(method.getName());
+                for (Object obj : params) {
+                    sb.append(obj.toString());
+                }
+                return sb.toString();
+            }
+        };
+    }
 
     @Bean
-    public CacheManager cacheManager(RedisTemplate<?,?> redisTemplate) {
-        CacheManager cacheManager = new RedisCacheManager(redisTemplate);
+    public JedisConnectionFactory redisConnectionFactory() {
+        JedisConnectionFactory factory = new JedisConnectionFactory();
+        factory.setHostName(host);
+        factory.setPort(port);
+        factory.setTimeout(timeout);
+        factory.setPassword(password);
+        factory.setDatabase(database);
+        return factory;
+    }
+
+    /**
+     * 配置CacheManager 管理cache
+     * @param redisTemplate
+     * @return
+     */
+    @Bean
+    public CacheManager cacheManager(RedisTemplate redisTemplate) {
+        RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
+        cacheManager.setDefaultExpiration(60*60); // 设置key-value超时时间
         return cacheManager;
     }
+
+
+
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
-        redisTemplate.setConnectionFactory(factory);
-        return redisTemplate;
-    }
-    @Bean
-    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory factory) {
-        StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
-        stringRedisTemplate.setConnectionFactory(factory);
-        return stringRedisTemplate;
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
+        template.setConnectionFactory(connectionFactory);
+
+        //使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值
+        Jackson2JsonRedisSerializer serializer = new Jackson2JsonRedisSerializer(Object.class);
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        serializer.setObjectMapper(mapper);
+
+        template.setValueSerializer(serializer);
+        //使用StringRedisSerializer来序列化和反序列化redis的key值
+        template.setKeySerializer(new StringRedisSerializer());
+        template.afterPropertiesSet();
+        return template;
     }
 }
+
