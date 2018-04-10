@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="jpa" />
+        <module name="mongo" />
+        <module name="mybatis" />
+        <module name="myproject" />
+        <module name="rabbit" />
+        <module name="rabbit (1) (com.connext.test.rabbit)" />
+        <module name="redis" />
+        <module name="sqlserver" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="jpa" target="1.8" />
+      <module name="mongo" target="1.8" />
+      <module name="mybatis" target="1.8" />
+      <module name="myproject" target="1.8" />
+      <module name="rabbit" target="1.8" />
+      <module name="rabbit (1) (com.connext.test.rabbit)" target="1.8" />
+      <module name="redis" target="1.8" />
+      <module name="sqlserver" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

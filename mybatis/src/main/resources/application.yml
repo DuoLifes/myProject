@@ -1,0 +1,26 @@
+server:
+  port: 2001
+
+db:
+  host: localhost
+  port: 3306
+  username: root
+  password: 123456
+
+mybatis:
+    typeAliasesPackage: com.connext.test.mybatis.entity
+    mapperLocations: classpath:mapper/*.xml
+
+spring:
+  datasource:
+      driverClassName: com.mysql.jdbc.Driver
+      type: com.zaxxer.hikari.HikariDataSource
+      url: jdbc:mysql://${db.host}:${db.port}/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: ${db.username}
+      password: ${db.password}
+      hikari:
+        pool-name: ddmp-basic
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true

@@ -1,0 +1,10 @@
+server:
+  port: 2000
+
+mongo:
+  uri: mongodb://localhost:27017/Mydatabase
+
+spring:
+  data:
+      mongodb:
+        uri: ${mongo.uri}

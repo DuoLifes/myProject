@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.connext.test.mybatis.repository.PersonRepository">
+    <resultMap id="BaseResultMap" type="com.connext.test.mybatis.entity.Person">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="address" property="address" />
+    </resultMap>
+
+    <select id="findAll"  resultMap="BaseResultMap">
+        SELECT * FROM person
+    </select>
+
+    <select id="add"  parameterType="Person">
+        INSERT into person VALUES ('2','王鹤','上海')
+    </select>
+
+    <select id="findCount"  resultType="int">
+        SELECT COUNT(1) FROM person
+    </select>
+
+    <select id="findByPage" resultMap="BaseResultMap">
+        select * from person p ORDER BY p.id ASC
+        limit #{begin},#{size}
+    </select>
+
+    <select id="PageAble" resultMap="BaseResultMap">
+        select * from person p ORDER BY p.id ASC
+        limit #{begin},#{size}
+    </select>
+</mapper>
