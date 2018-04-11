@@ -10,7 +10,6 @@
         <module name="mongo" />
         <module name="mybatis" />
         <module name="myproject" />
-        <module name="rabbit" />
         <module name="rabbit (1) (com.connext.test.rabbit)" />
         <module name="redis" />
         <module name="sqlserver" />

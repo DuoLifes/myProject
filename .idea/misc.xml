@@ -8,7 +8,6 @@
         <option value="$PROJECT_DIR$/mybatis/pom.xml" />
         <option value="$PROJECT_DIR$/jpa/pom.xml" />
         <option value="$PROJECT_DIR$/sqlserver/pom.xml" />
-        <option value="$PROJECT_DIR$/rabbit/pom.xml" />
         <option value="$PROJECT_DIR$/redis/pom.xml" />
       </list>
     </option>
