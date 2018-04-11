@@ -10,19 +10,15 @@
         <module name="mongo" />
         <module name="mybatis" />
         <module name="myproject" />
-        <module name="rabbit (1) (com.connext.test.rabbit)" />
         <module name="redis" />
         <module name="sqlserver" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="demo" target="1.8" />
       <module name="jpa" target="1.8" />
       <module name="mongo" target="1.8" />
       <module name="mybatis" target="1.8" />
       <module name="myproject" target="1.8" />
-      <module name="rabbit" target="1.8" />
-      <module name="rabbit (1) (com.connext.test.rabbit)" target="1.8" />
       <module name="redis" target="1.8" />
       <module name="sqlserver" target="1.8" />
     </bytecodeTargetLevel>
