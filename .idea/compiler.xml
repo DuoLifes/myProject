@@ -16,6 +16,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="demo" target="1.8" />
       <module name="jpa" target="1.8" />
       <module name="mongo" target="1.8" />
       <module name="mybatis" target="1.8" />
