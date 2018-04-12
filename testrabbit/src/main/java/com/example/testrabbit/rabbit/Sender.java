@@ -24,20 +24,20 @@ public class Sender {
     }
 
 
-//    public static void main(String[] args) {
-//        City city=new City("1","南京","六朝古都");
-//
-//        String str = JSON.toJSON(city).toString();
-//
-//        JSONObject jo = JSON.parseObject(str);
-//        System.out.println(jo);
-//
-//        City city1 = JSONObject.toJavaObject(jo,City.class);
-//        System.out.println("city1:" + city1.getName());
-//
-//        City city2 = JSON.parseObject(str,City.class);
-//
-//        System.out.println("city2:" + city2.getName());
-//
-//    }
+    public static void main(String[] args) {
+        City city=new City("1","南京","六朝古都");
+
+        String str = JSON.toJSON(city).toString();
+
+        JSONObject jo = JSON.parseObject(str);
+        System.out.println(jo);
+
+        City city1 = JSONObject.toJavaObject(jo,City.class);
+        System.out.println("city1:" + city1.getName());
+
+        City city2 = JSON.parseObject(str,City.class);
+
+        System.out.println("city2:" + city2.getName());
+
+    }
 }
