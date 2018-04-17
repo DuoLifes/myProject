@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/sqlserver/pom.xml" />
         <option value="$PROJECT_DIR$/redis/pom.xml" />
         <option value="$PROJECT_DIR$/testrabbit/pom.xml" />
+        <option value="$PROJECT_DIR$/es/pom.xml" />
       </list>
     </option>
   </component>
