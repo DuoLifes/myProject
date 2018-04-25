@@ -34,8 +34,9 @@ public class KafkaSender {
 
 
     public void mySend(){
-        Person person=new Person("1","王思雨","女",25);
-        String str = JSON.toJSON(person).toString();
+        //Person person=new Person("1","王思雨","女",25);
+        Person person1=new Person("2","张帅","男",25);
+        String str = JSON.toJSON(person1).toString();
         //JSONObject jo = JSON.parseObject(str);
         System.out.println("发送消息:"+str+"++++++++++++++++++++++");
         kafkaTemplate.send("test",str);
