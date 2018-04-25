@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="es" />
         <module name="jpa" />
+        <module name="kafka" />
         <module name="mongo" />
         <module name="mybatis" />
         <module name="myproject" />
@@ -19,6 +20,7 @@
     <bytecodeTargetLevel>
       <module name="es" target="1.8" />
       <module name="jpa" target="1.8" />
+      <module name="kafka" target="1.8" />
       <module name="mongo" target="1.8" />
       <module name="mybatis" target="1.8" />
       <module name="myproject" target="1.8" />
