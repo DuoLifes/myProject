@@ -16,7 +16,7 @@ public class Neo4jApplicationTests {
 	private StudentRepository studentRepository;
 	@Test
 	public void contextLoads() {
-		Student student=new Student("李四","女");
+		Student student=new Student("王五","男");
 		studentRepository.save(student);
 	}
 
