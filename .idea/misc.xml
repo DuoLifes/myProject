@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/testrabbit/pom.xml" />
         <option value="$PROJECT_DIR$/es/pom.xml" />
         <option value="$PROJECT_DIR$/kafka/pom.xml" />
+        <option value="$PROJECT_DIR$/neo4j/pom.xml" />
       </list>
     </option>
   </component>
