@@ -13,6 +13,7 @@
         <module name="mybatis" />
         <module name="myproject" />
         <module name="neo4j" />
+        <module name="postgresql" />
         <module name="redis" />
         <module name="sqlserver" />
         <module name="testrabbit" />
@@ -26,6 +27,7 @@
       <module name="mybatis" target="1.8" />
       <module name="myproject" target="1.8" />
       <module name="neo4j" target="1.8" />
+      <module name="postgresql" target="1.8" />
       <module name="redis" target="1.8" />
       <module name="sqlserver" target="1.8" />
       <module name="testrabbit" target="1.8" />
