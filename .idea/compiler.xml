@@ -19,12 +19,13 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="demo" target="1.8" />
       <module name="es" target="1.8" />
       <module name="jpa" target="1.8" />
       <module name="kafka" target="1.8" />
       <module name="mongo" target="1.8" />
       <module name="mybatis" target="1.8" />
-      <module name="myproject" target="1.8" />
+      <module name="myproject" target="1.5" />
       <module name="neo4j" target="1.8" />
       <module name="redis" target="1.8" />
       <module name="sqlserver" target="1.8" />
