@@ -14,10 +14,13 @@
         <option value="$PROJECT_DIR$/kafka/pom.xml" />
         <option value="$PROJECT_DIR$/neo4j/pom.xml" />
         <option value="$PROJECT_DIR$/postgresql/pom.xml" />
+        <option value="$PROJECT_DIR$/webservice/pom.xml" />
+        <option value="$PROJECT_DIR$/webserver/pom.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
+  <component name="WebServicesPlugin" addRequiredLibraries="true" />
 </project>
